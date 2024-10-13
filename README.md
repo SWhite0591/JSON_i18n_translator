@@ -27,8 +27,8 @@
 0. 准备DeepSeek大模型API Key，[点击注册](https://deepseek.com/)送500万tokens；如果要用SiliconFlow的模型，[点击注册](https://cloud.siliconflow.cn/i/cVmjfg55)获取2000万tokens
 1. 把仓库clone到本地，安装python3环境
 2. 将配置文件`config.py.example`重命名为`config.py`，并设置API Key等参数
-3. 确保locale文件夹下有`en.json`文件，并建立其它语言的`语言代码.json`文件，如`zh.json`、`ja.json`等。翻译结果会插入回locale文件夹下原有的语言包文件中，请注意版本控制或备份
-4. 修改翻译要求文件，添加需要特殊翻译的关键词和翻译要求
+3. 确保locale文件夹下存在`en.json`文件，并建好其它语言的`语言代码.json`文件，如`zh.json`、`ja.json`等。翻译结果会插入回locale文件夹下原有的语言包文件中，请注意版本控制或备份
+4. （可选）修改翻译要求文件，添加需要特殊翻译的关键词和翻译要求
 5. 执行命令，等待翻译完成
 
 ```
