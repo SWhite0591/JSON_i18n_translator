@@ -9,6 +9,7 @@ def main():
     parser = argparse.ArgumentParser(description="JSON Language Pack Translator")
     parser.add_argument("locale_path", help="Path to the locale directory")
     parser.add_argument("--api", choices=["siliconflow", "deepseek"], default="deepseek", help="Choose API to use")
+    parser.add_argument("--retranslate", nargs="+", help="Keys to force retranslation, e.g. 'a.b.c' 'd.e.f'")
     
     args = parser.parse_args()
 
@@ -21,8 +22,6 @@ def main():
         api = SiliconFlowAPI()
     elif args.api == "deepseek":
         api = DeepSeekAPI()
-    # elif args.api == "openrouter":
-    #     api = OpenRouterAPI()
 
     # Process all JSON files in the locale directory
     for filename in os.listdir(args.locale_path):
@@ -36,7 +35,7 @@ def main():
             target_data = load_json_ordered(target_path)
 
             # Process translation
-            merged_data = process_translation(api, en_data, target_data, target_language, args.locale_path)
+            merged_data = process_translation(api, en_data, target_data, target_language, args.locale_path, args.retranslate)
 
             # Save updated target data
             save_json_ordered(target_path, merged_data, ensure_ascii=False)
@@ -48,4 +47,4 @@ def main():
 if __name__ == "__main__":
     main()
 
-# Usage: python3 main.py path/to/locale --api deepseek
+# Usage: python3 main.py path/to/locale --api deepseek --retranslate a.b.c d.e.f

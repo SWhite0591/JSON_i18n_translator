@@ -6,12 +6,11 @@ import os
 from config import REQUIREMENTS_FILE_FORMAT, SYSTEM_PROMPT_PATH, TRANSLATE_CHUNK_SIZE
 from api.deepseek_api import DeepSeekAPI
 
-def process_translation(api, en_data, target_data, target_language, locale_path):
-    # Load system prompt
+def process_translation(api, en_data, target_data, target_language, locale_path, retranslate_keys=None):
+    # Load system prompt and requirements files
     with open(SYSTEM_PROMPT_PATH, 'r', encoding='utf-8') as f:
         system_prompt = f.read()
 
-    # Try to load requirements file
     requirements_file = os.path.join(locale_path, REQUIREMENTS_FILE_FORMAT.format(lang=target_language))
     requirements = ""
     if os.path.exists(requirements_file):
@@ -22,8 +21,20 @@ def process_translation(api, en_data, target_data, target_language, locale_path)
     missing_translations = find_missing_translations(en_data, target_data)
     print(f"Missing translations: {len(missing_translations)}")
 
+    # Add keys to be retranslated to missing_translations
+    if retranslate_keys:
+        for key in retranslate_keys:
+            retranslate_data = get_nested_value(en_data, key)
+            if retranslate_data is not None:
+                if isinstance(retranslate_data, (dict, OrderedDict)):
+                    nested_retranslate = find_missing_translations(retranslate_data, {}, key)
+                    missing_translations.update(nested_retranslate)
+                else:
+                    missing_translations[key] = retranslate_data
+        print(f"Total translations to process: {len(missing_translations)}")
+
     if not missing_translations:
-        print("No missing translations. Skipping translation process.")
+        print("No missing translations or keys to retranslate. Skipping translation process.")
         return target_data
 
     missing_chunks = [dict(list(missing_translations.items())[i:i+TRANSLATE_CHUNK_SIZE]) for i in range(0, len(missing_translations), TRANSLATE_CHUNK_SIZE)]
@@ -35,18 +46,15 @@ def process_translation(api, en_data, target_data, target_language, locale_path)
         # Merge chunk translations into translated_data
         translated_data.update(chunk_translated)
 
-    # print("Translated data:")
-    # print(translated_data)
-
     # Merge translations
-    merged_data, untranslated_keys = merge_translations_ordered(en_data, target_data, translated_data)
+    merged_data, untranslated_keys = merge_translations_ordered(en_data, target_data, translated_data, retranslate_keys)
 
     if untranslated_keys:
-        print(f"警告：以下键未被翻译: {', '.join(untranslated_keys)}")
+        print(f"Warning: The following keys were not translated: {', '.join(untranslated_keys)}")
 
     return merged_data
 
-def merge_translations_ordered(en_data, target_data, translated_data, prefix=''):
+def merge_translations_ordered(en_data, target_data, translated_data, retranslate_keys=None, prefix=''):
     result = OrderedDict()
     untranslated_keys = []
     
@@ -54,22 +62,23 @@ def merge_translations_ordered(en_data, target_data, translated_data, prefix='')
         full_key = f"{prefix}.{key}" if prefix else key
         
         if isinstance(value, OrderedDict):
-            
             nested_target = target_data.get(key, OrderedDict())
-            nested_result, nested_untranslated = merge_translations_ordered(value, nested_target, translated_data, full_key)
+            nested_result, nested_untranslated = merge_translations_ordered(
+                value, nested_target, translated_data, retranslate_keys, full_key
+            )
             result[key] = nested_result
             untranslated_keys.extend(nested_untranslated)
         else:
-            
-            if key in target_data:
-                result[key] = target_data[key]
-            elif full_key in translated_data:
+            if full_key in translated_data:
                 result[key] = translated_data[full_key]
-            elif key in translated_data:
-                result[key] = translated_data[key]
+            elif key in target_data and (not retranslate_keys or full_key not in retranslate_keys):
+                result[key] = target_data[key]
             else:
-                result[key] = value  # 使用英文原文作为默认值
-                untranslated_keys.append(full_key)
+                if full_key in translated_data:
+                    result[key] = translated_data[full_key]
+                else:
+                    result[key] = value  # Use English text as default
+                    untranslated_keys.append(full_key)
 
     return result, untranslated_keys
 
@@ -85,9 +94,20 @@ def get_full_key(data, key, prefix=''):
                 return result
     return None
 
-def check_untranslated_keys(missing_translations, translated_data):
-    untranslated = []
-    for key in missing_translations:
-        if key not in translated_data:
-            untranslated.append(key)
-    return untranslated
+def get_nested_value(data, key):
+    keys = key.split('.')
+    value = data
+    for k in keys:
+        if isinstance(value, dict) and k in value:
+            value = value[k]
+        else:
+            return None
+    return value
+
+def set_nested_value(data, key, value):
+    keys = key.split('.')
+    for k in keys[:-1]:
+        if k not in data:
+            data[k] = {}
+        data = data[k]
+    data[keys[-1]] = value
