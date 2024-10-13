@@ -47,7 +47,6 @@
 ```
 
 - 使用翻译要求文件，默认翻译要求文件格式为{lang}_requirements.md，比如zh_requirements.md。脚本会自动读取该文件内容，如果读取不到视为没有特殊翻译要求。
-- 
 ```
     # 可以通过config.py中的这行代码修改文件名。
     REQUIREMENTS_FILE_FORMAT = "{lang}_requirements.md"
