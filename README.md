@@ -39,10 +39,18 @@
 
 ## 其它功能
 
-- 支持对已经存在翻译的某个文案进行重新翻译（改动英文文案后同步翻译到多语言文案中），通过JSON中的字段路径标识目标文案。（暂时没想到更简单的输入方式）
+- 支持对已经存在翻译的某个文案进行重新翻译（改动英文文案后同步翻译到多语言文案中），。（暂时没想到更简单的输入方式）
 
 ```
+    # 通过JSON中的字段路径标识目标文案
     python3 main.py path/to/your/locales --retranslate a.b.c d.e.f
+```
+
+- 使用翻译要求文件，默认翻译要求文件格式为{lang}_requirements.md，比如zh_requirements.md。脚本会自动读取该文件内容，如果读取不到视为没有特殊翻译要求。
+- 
+```
+    # 可以通过config.py中的这行代码修改文件名。
+    REQUIREMENTS_FILE_FORMAT = "{lang}_requirements.md"
 ```
 
 - 支持通过命令行参数使用不同模型进行翻译
