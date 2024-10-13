@@ -1,0 +1,98 @@
+{
+  "common": {
+    "free": "免费",
+    "open": "打开",
+    "close": "关闭",
+    "save": "保存",
+    "cancel": "取消",
+    "image_generator": {
+      "ImageGenertorKeyword": "图片生成器",
+      "generate": "生成",
+      "prompt": "提示",
+      "style": "风格",
+      "resolution": "分辨率",
+      "download": "下载",
+      "share": "分享",
+      "loading": "正在生成图片...",
+      "error": "生成图片时出错"
+    }
+  },
+  "ambiguous": {
+    "free_sample": "免费样品",
+    "free_speech": "言论自由",
+    "register_to_free_use": "注册以免费使用",
+    "feel_free_to_use": "随意使用",
+    "open_source": "这是一个开源项目",
+    "open_door": "请开门"
+  },
+  "html_tags": {
+    "welcome_message": "欢迎来到<b>我们的网站</b>！",
+    "error_notice": "<span class='error'>发生错误</span>了",
+    "link_example": "点击<a href='#'>这里</a>获取更多信息"
+  },
+  "placeholders": {
+    "greeting": "你好，{name}！",
+    "items_count": "您的购物车中有{count}件商品",
+    "price_display": "价格：${price}"
+  },
+  "complex": {
+    "mixed_content": "请<b>注册</b>以接收我们关于{topic}的<i>免费</i>通讯",
+    "conditional": "您有{count, plural, =0{没有消息} one{1条消息} other{#条消息}}",
+    "date_format": "Today is {date, date, medium}"
+  },
+  "technical": {
+    "api_error": "API错误: {errorCode} - {errorMessage}",
+    "file_size": "文件大小: {size, number, bytes}"
+  },
+  "cultural": {
+    "idiom": "大雨倾盆",
+    "proverb": "早起的鸟儿有虫吃"
+  },
+  "nested": {
+    "menu": {
+      "file": {
+        "new": "新建",
+        "open": "打开",
+        "save": {
+          "save_as": "另存为",
+          "save_all": "全部保存"
+        }
+      },
+      "edit": {
+        "copy": "复制",
+        "paste": "粘贴",
+        "undo": "撤销"
+      }
+    },
+    "user": {
+      "profile": {
+        "personal_info": {
+          "name": "姓名",
+          "age": "年龄",
+          "address": {
+            "street": "街道",
+            "city": "城市",
+            "country": "国家"
+          }
+        },
+        "preferences": {
+          "language": "语言",
+          "theme": {
+            "light": "浅色",
+            "dark": "深色",
+            "system": "系统默认"
+          },
+          "notifications": {
+            "email": "邮件通知",
+            "push": "推送通知",
+            "frequency": {
+              "daily": "每天",
+              "weekly": "每周",
+              "monthly": "每月"
+            }
+          }
+        }
+      }
+    }
+  }
+}

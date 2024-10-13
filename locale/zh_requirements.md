@@ -1,0 +1,1 @@
+image should be translated to 图片

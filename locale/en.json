@@ -1,0 +1,98 @@
+{
+  "common": {
+    "free": "Free",
+    "open": "Open",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "image_generator": {
+      "ImageGenertorKeyword": "Image Generator",
+      "generate": "Generate",
+      "prompt": "Prompt",
+      "style": "Style",
+      "resolution": "Resolution",
+      "download": "Download",
+      "share": "Share",
+      "loading": "Generating image...",
+      "error": "Error generating image"
+    }
+  },
+  "ambiguous": {
+    "free_sample": "Free sample",
+    "free_speech": "Free speech",
+    "register_to_free_use": "Register to free use",
+    "feel_free_to_use": "Feel free to use",
+    "open_source": "It's a open source project",
+    "open_door": "Open the door Please"
+  },
+  "html_tags": {
+    "welcome_message": "Welcome to <b>our website</b>!",
+    "error_notice": "<span class='error'>An error occurred</span>",
+    "link_example": "Click <a href='#'>here</a> for more information"
+  },
+  "placeholders": {
+    "greeting": "Hello, {name}!",
+    "items_count": "You have {count} item(s) in your cart",
+    "price_display": "Price: ${price}"
+  },
+  "complex": {
+    "mixed_content": "Please <b>register</b> to receive our <i>free</i> newsletter about {topic}",
+    "conditional": "You have {count, plural, =0{no messages} one{1 message} other{# messages}}",
+    "date_format": "Today is {date, date, medium}"
+  },
+  "technical": {
+    "api_error": "API Error: {errorCode} - {errorMessage}",
+    "file_size": "File size: {size, number, bytes}"
+  },
+  "cultural": {
+    "idiom": "It's raining cats and dogs",
+    "proverb": "The early bird catches the worm"
+  },
+  "nested": {
+    "menu": {
+      "file": {
+        "new": "New",
+        "open": "Open",
+        "save": {
+          "save_as": "Save As",
+          "save_all": "Save All"
+        }
+      },
+      "edit": {
+        "copy": "Copy",
+        "paste": "Paste",
+        "undo": "Undo"
+      }
+    },
+    "user": {
+      "profile": {
+        "personal_info": {
+          "name": "Name",
+          "age": "Age",
+          "address": {
+            "street": "Street",
+            "city": "City",
+            "country": "Country"
+          }
+        },
+        "preferences": {
+          "language": "Language",
+          "theme": {
+            "light": "Light",
+            "dark": "Dark",
+            "system": "System"
+          },
+          "notifications": {
+            "email": "Email notifications",
+            "push": "Push notifications",
+            "frequency": {
+              "daily": "Daily",
+              "weekly": "Weekly",
+              "monthly": "Monthly"
+            }
+          }
+        }
+      }
+    }
+  }
+}

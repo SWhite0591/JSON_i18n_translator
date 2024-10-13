@@ -1,0 +1,26 @@
+# Note: Copy this file to config.py and remove the ".example" suffix.
+# The config.py file will be ignored by Git to keep your API keys secure.
+
+import os
+
+# DeepSeek
+DEEPSEEK_API_KEY = "your_deepseek_api_key"
+DEEPSEEK_MODEL_NAME = "deepseek-chat"
+DEEPSEEK_API_URL = "https://api.deepseek.com"
+
+# SiliconFlow
+# Deepseek in siliconflow have some issues, so we use deepseek directly.
+SILICONFLOW_MODEL_NAME = "deepseek-ai/DeepSeek-V2.5"
+SILICONFLOW_API_URL = "https://api.siliconflow.cn"
+SILICONFLOW_API_KEY = os.environ.get("SILICONFLOW_API_KEY", "your_siliconflow_api_key")
+# SILICONFLOW_API_KEY = "your_siliconflow_api_key"
+
+# OpenRouter
+OPENROUTER_MODEL_NAME = "your_openrouter_model_name"
+OPENROUTER_API_URL = "your_openrouter_api_url"
+OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "your_openrouter_api_key")
+# OPENROUTER_API_KEY = "sk-1234567890"
+
+SYSTEM_PROMPT_PATH = "prompts/system_prompt.md"
+REQUIREMENTS_FILE_FORMAT = "{lang}_requirements.md"
+TRANSLATE_CHUNK_SIZE = 50
