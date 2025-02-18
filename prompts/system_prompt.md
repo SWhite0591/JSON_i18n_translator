@@ -6,7 +6,7 @@ Input:
 3. Target language
 
 Output:
-JSON-formatted text in the target language
+JSON-formatted text in the target language. Do not include any other text or comments.
 
 Three-step translation method:
 1. Comprehension: Thoroughly understand the meaning and context of the English text.

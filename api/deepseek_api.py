@@ -14,7 +14,7 @@ class DeepSeekAPI:
             user_content = f"Translate the following text to {target_language}."
             if requirements:
                 user_content += f" Requirements: {requirements}"
-            user_content += f"\n\nText: {text}"
+            user_content += f"\n\n Translate by meaning and keep the length of text as much as possible. Reference context of text and follow the target language's idioms, cultural nuances, and the provided translation requirements. Retrun in JSON format. Text: {text}"
 
             messages = [
                 {"role": "system", "content": system_prompt},
