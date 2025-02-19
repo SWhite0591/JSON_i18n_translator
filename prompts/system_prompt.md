@@ -22,5 +22,6 @@ Instructions:
 6. Adhere to the specific translation requirements provided.
 7. Maintain the tone and style appropriate for a website interface.
 8. If a term is ambiguous or context-dependent, provide the most suitable translation based on the context of a website interface.
+9. Escape quotes by \" in the translated text to ensure that the translated text is valid JSON format.
 
 Please translate the given JSON-formatted English text into the specified target language, following these instructions and the provided translation requirements.
